@@ -1,0 +1,303 @@
+/* App container */
+.App {
+  padding: 1.4vw;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Heading styles */
+h1 {
+  font-size: 1.75vw;
+  margin-bottom: 1.05vw;
+  color: #333;
+}
+
+/* AddQuestion component styles */
+.add-question-container {
+  margin-bottom: 1.05vw;
+}
+
+.add-question-input {
+  margin-bottom: 0.7vw;
+}
+
+.add-question-button {
+  margin-top: 0.7vw;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.35vw;
+  padding: 0.56vw 1.05vw;
+  cursor: pointer;
+}
+
+.add-question-button:hover {
+  background-color: #0056b3;
+}
+
+/* SearchQuestions component styles */
+.search-input {
+  width: 85%;
+  padding: 1.05vw;
+  border: 0.07vw solid #ccc;
+  border-radius: 0.35vw;
+  margin-bottom: 1.05vw;
+}
+
+/* QuestionList component styles */
+.question-container {
+  max-height: 56vh;
+  overflow-y: auto;
+}
+.question-list.list-group{
+  overflow-y: scroll;
+  scroll-behavior: auto;
+  max-height:85vh;
+}
+.question-item {
+  border: 0.07vw solid #ccc;
+  border-radius: 0.35vw;
+  padding: 1.05vw;
+  margin-bottom: 0.7vw;
+  background-color: #f9f9f9;
+}
+
+.question-item input[type="text"] {
+  width: 85%;
+  padding: 1.05vw;
+  border: 0.07vw solid #ccc;
+  border-radius: 0.35vw;
+  margin-bottom: 0.7vw;
+  resize: vertical;
+  min-height: 3.5vw;
+}
+
+.choice-item input[type="text"] {
+  width: 85%;
+  padding: 1.05vw;
+  border: 0.07vw solid #ccc;
+  border-radius: 0.35vw;
+  margin-bottom: 0.7vw;
+  margin-right: 1.05vw;
+}
+
+.choice-buttons button {
+  padding: 0.84vw 1.4vw;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.35vw;
+  cursor: pointer;
+}
+
+.choice-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.question-item.list-group-item {
+  margin-bottom: 5vh;
+  outline: black;
+}
+
+/* Button styles */
+.btn{
+  width:8vw;
+  height:5vh;
+  font-size:1rem;
+}
+.btn.btn-primary {
+  font-size:.5rem;
+}
+button {
+  padding: 0.20vw .5vw;
+  background-color: #2cff10;
+  color: #fff;
+  border: none;
+  border-radius: 0.35vw;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  padding: .5vw;
+  max-height: 10vh;
+  font-size: .7rem;
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
+  padding: 1vw;
+  max-height: 2vh;
+}
+
+.search-container > * {
+  margin-right: 3.5vw;
+}
+
+.search.form-control {
+ height: 50vh;
+  margin-left: 0.35vw;
+}
+input#search.form-control {
+  height: 4vh;
+}
+.search-container-comp {
+  height: 8vh;
+  margin-left: 1.5vw;
+  margin-right: 1.1vw;
+}
+
+.numberofquestions_nav {
+  color: #fff;
+}
+
+.navbar-nav {
+  color:#fff;
+}
+
+.navbar-brand {
+  font-size: .5vh;
+}
+/* 
+testing modal css */
+
+
+
+/* Styling for the radio buttons */
+input[type="radio"] {
+  margin-right: 0.5rem;
+}
+
+.question-container {
+  margin-bottom: 20px; /* Add some space between questions */
+  border-bottom: 1px solid #ccc; /* Add border to separate questions */
+  padding-bottom: 20px; /* Add some padding below each question */
+}
+
+.choice-label {
+  margin-right: 10px; /* Add some space between the choice label and the radio button */
+  font-weight: bold; /* Make the choice label bold */
+}
+
+.question-prompt {
+  margin-bottom: 10px; /* Add some space below the question */
+  font-weight: bold; /* Make the question bold */
+}
+
+.answer-choice {
+  margin-bottom: 5px; /* Add some space between choices */
+}
+
+.answer-feedback {
+  margin-top: 5px; /* Add some space above the answer feedback */
+  color: #ff0000; /* Set color to red for wrong answers */
+  font-style: italic; /* Make the feedback italic */
+}
+
+.modal-content {
+  padding: 20px; /* Add padding to the modal content */
+}
+
+/* Styling for the radio buttons */
+input[type="radio"] {
+  margin-right: 0.5rem;
+}
+
+/* Styling for the submit button */
+.submit-button {
+  margin-top: 1rem;
+}
+/* 
+real test generator */
+.test-generator-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.test-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.test-header h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.test-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.test-options input[type="number"] {
+  width: 60px;
+  padding: 8px;
+  margin-right: 10px;
+}
+
+.test-options button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.test-options button:hover {
+  background-color: #0056b3;
+}
+
+.question-container {
+  border-bottom: 1px solid #333;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.question-container:last-child {
+  border-bottom: none; /* Remove bottom border from the last question */
+}
+
+.question {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.answer-choice {
+  margin-bottom: 5px;
+}
+
+.answer-choice label {
+  display: flex;
+  align-items: center;
+}
+
+.answer-feedback {
+  margin-top: 5px;
+  color: #ff0000;
+  font-style: italic;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+/* Styling for the radio buttons */
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+/* Styling for the submit button */
+.submit-button {
+  margin-top: 20px;
+  width: 100%;
+}
