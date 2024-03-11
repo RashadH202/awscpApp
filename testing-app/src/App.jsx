@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.css';
 import { Container, Row, Col } from 'react-bootstrap';
-
+import './App.css'
 import QuestionList from './Componets/QuestionList';
+import HighScores from './Componets/HighScores';
 import NavBar from './Componets/NavBar';
 
 function App() {
   // State variables
   const [questions, setQuestions] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showModal, setShowModal] = useState(false); // State for controlling modal visibility
+  const [modalClosed, setModalClosed] = useState(false); // State for tracking modal closure
 
   // Fetch questions from the backend when the component mounts
   useEffect(() => {
     fetchQuestions();
-  }, []);
+  }, [modalClosed]); // Refetch questions when modal is closed
 
   // Fetch questions from the backend
   const fetchQuestions = async () => {
@@ -51,10 +53,16 @@ function App() {
     setSearchQuery(e.target.value);
   };
 
-  // Filter questions based on the search query
-  const filteredQuestions = questions.filter((question) =>
-    question.question.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Function to toggle the modal visibility
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  // Function to handle modal closure
+  const handleCloseModal = () => {
+    setShowModal(false); // Close the modal
+    setModalClosed(!modalClosed); // Trigger re-render by changing the state
+  };
 
   return (
     <Container fluid>
@@ -69,15 +77,21 @@ function App() {
           />
         </Col>
       </Row>
-      {/* Question list */}
+      {/* Question list and High Scores */}
       <Row>
-        <Col>
+        <Col md={8}>
+          {/* Question List component */}
           <QuestionList
-            filteredQuestions={filteredQuestions}
+            filteredQuestions={questions} // Pass filtered questions directly
             fetchQuestions={fetchQuestions}
             deleteQuestion={deleteQuestion}
             updateQuestion={updateQuestion}
+            toggleModal={toggleModal} // Pass toggleModal function to open/close modal
           />
+        </Col>
+        <Col md={4}>
+          {/* High Scores component */}
+          <HighScores showModal={showModal} onCloseModal={handleCloseModal} refreshScores={modalClosed} /> {/* Pass onCloseModal and refreshScores props */}
         </Col>
       </Row>
     </Container>

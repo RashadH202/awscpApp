@@ -301,3 +301,40 @@ input[type="radio"] {
   margin-top: 20px;
   width: 100%;
 }
+
+/* Styling for the high scores */
+.high-scores-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin-top: 20px;
+}
+
+.high-score {
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #eaeaea;
+  border-radius: 3px;
+}
+
+.high-score p {
+  margin: 0;
+}
+
+.high-score span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.high-score .score {
+  color: #007bff;
+}
+
+.high-score .time {
+  color: #28a745;
+}
+
+.high-score .number {
+  color: #dc3545;
+}

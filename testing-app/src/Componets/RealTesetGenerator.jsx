@@ -63,11 +63,22 @@ const RealTestGenerator = () => {
         }));
     };
 
-    const handleSubmitTest = () => {
+    const handleSubmitTest = async () => {
         setIsTestSubmitted(true);
         const correctAnswers = selectedQuestions.filter(question => userAnswers[question.id] === question.correct_answer);
         const accuracyPercentage = (correctAnswers.length / totalQuestions) * 100;
         setScore(accuracyPercentage);
+
+        // Send test results to the server
+        try {
+            await axios.post('http://localhost:5000/highscores', {
+                score: accuracyPercentage,
+                timeFinished: new Date().toLocaleString(),
+                numberOfQuestions: totalQuestions
+            });
+        } catch (error) {
+            console.error('Error sending test results:', error);
+        }
     };
 
     const formatTime = (time) => {
