@@ -10,8 +10,8 @@ function App() {
   // State variables
   const [questions, setQuestions] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [showModal, setShowModal] = useState(false); // State for controlling modal visibility
-  const [modalClosed, setModalClosed] = useState(false); // State for tracking modal closure
+  const [showModal, setShowModal] = useState(false);
+  const [modalClosed, setModalClosed] = useState(false);
 
   // Fetch questions from the backend when the component mounts
   useEffect(() => {
@@ -21,8 +21,8 @@ function App() {
   // Fetch questions from the backend
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/questions');
-      setQuestions(response.data.questions);
+      const response = await axios.get('https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions');
+      setQuestions(response.data);
     } catch (error) {
       console.error('Error fetching questions:', error);
     }
@@ -31,7 +31,7 @@ function App() {
   // Delete a question by its ID
   const deleteQuestion = async (questionId) => {
     try {
-      await axios.delete(`http://localhost:5000/questions/${questionId}`);
+      await axios.delete(`https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions/${questionId}`);
       fetchQuestions(); // Refetch questions after deletion
     } catch (error) {
       console.error('Error deleting question:', error);
@@ -41,7 +41,7 @@ function App() {
   // Update a question with new data
   const updateQuestion = async (updatedQuestion) => {
     try {
-      await axios.put(`http://localhost:5000/questions/${updatedQuestion.id}`, updatedQuestion);
+      await axios.put(`https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions/${updatedQuestion.id}`, updatedQuestion);
       fetchQuestions(); // Refetch questions after update
     } catch (error) {
       console.error('Error updating question:', error);
@@ -52,6 +52,11 @@ function App() {
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
   };
+
+  // Filter questions based on search query
+  const filteredQuestions = questions.filter(question =>
+    question.question.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   // Function to toggle the modal visibility
   const toggleModal = () => {
@@ -73,7 +78,7 @@ function App() {
             fetchQuestions={fetchQuestions}
             handleSearchInputChange={handleSearchInputChange}
             searchQuery={searchQuery}
-            questionCount={questions.length} // Pass the count of questions to the NavBar
+            questionCount={questions.length}
           />
         </Col>
       </Row>
@@ -82,16 +87,16 @@ function App() {
         <Col md={8}>
           {/* Question List component */}
           <QuestionList
-            filteredQuestions={questions} // Pass filtered questions directly
+            filteredQuestions={filteredQuestions} // Pass filtered questions
             fetchQuestions={fetchQuestions}
             deleteQuestion={deleteQuestion}
             updateQuestion={updateQuestion}
-            toggleModal={toggleModal} // Pass toggleModal function to open/close modal
+            toggleModal={toggleModal}
           />
         </Col>
         <Col md={4}>
           {/* High Scores component */}
-          <HighScores showModal={showModal} onCloseModal={handleCloseModal} refreshScores={modalClosed} /> {/* Pass onCloseModal and refreshScores props */}
+          <HighScores showModal={showModal} onCloseModal={handleCloseModal} refreshScores={modalClosed} />
         </Col>
       </Row>
     </Container>

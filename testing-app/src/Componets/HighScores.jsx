@@ -12,12 +12,13 @@ const HighScore = () => {
 
     const fetchHighScores = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/highscores');
-            setHighScores(response.data.highScores);
+            const response = await axios.get('https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/highscores');
+            setHighScores(response.data);
         } catch (error) {
             console.error('Error fetching high scores:', error);
         }
     };
+
 
     return (
         <div className="high-scores-container"> {/* Apply a class for the container */}
@@ -27,8 +28,9 @@ const HighScore = () => {
                     <li key={index} className="high-score"> {/* Apply a class for each high score item */}
                         <p>
                             <span className="score">{score.score}</span> - 
-                            <span className="time">{score.timeFinished}</span> - 
-                            <span className="number">{score.numberOfQuestions}</span>
+                            <span className="time">{score.timetofinish}</span> - 
+                            <span className="number">{score.numberofquestions}</span>
+                            <span className="name">{score.name}</span>
                         </p>
                     </li>
                 ))}

@@ -7,7 +7,7 @@ const QuestionList = ({ filteredQuestions, fetchQuestions }) => {
 
     const deleteQuestion = async (questionId) => {
         try {
-            await axios.delete(`http://localhost:5000/questions/${questionId}`);
+            await axios.delete(`https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions/${questionId}`);
             fetchQuestions(); // Fetch updated questions after deleting one
         } catch (error) {
             console.error('Error deleting question:', error);
@@ -16,7 +16,7 @@ const QuestionList = ({ filteredQuestions, fetchQuestions }) => {
 
     const updateQuestion = async (updatedQuestion) => {
         try {
-            await axios.put(`http://localhost:5000/questions/${updatedQuestion.id}`, updatedQuestion);
+            await axios.put(`https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions/${updatedQuestion.id}`, updatedQuestion);
             fetchQuestions(); // Fetch updated questions after updating one
         } catch (error) {
             console.error('Error updating question:', error);
@@ -32,7 +32,7 @@ const QuestionList = ({ filteredQuestions, fetchQuestions }) => {
     const addChoiceInput = async (question) => {
         const choices = [...question.choices, '']; // Add an empty choice
         try {
-            await axios.put(`http://localhost:5000/questions/${question.id}`, { ...question, choices });
+            await axios.put(`https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions/${question.id}`, { ...question, choices });
             fetchQuestions(); // Fetch updated questions after adding choice
         } catch (error) {
             console.error('Error adding choice:', error);
@@ -42,7 +42,7 @@ const QuestionList = ({ filteredQuestions, fetchQuestions }) => {
     const removeChoiceInput = async (index, question) => {
         const choices = [...question.choices.slice(0, index), ...question.choices.slice(index + 1)];
         try {
-            await axios.put(`http://localhost:5000/questions/${question.id}`, { ...question, choices });
+            await axios.put(`https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions/${question.id}`, { ...question, choices });
             fetchQuestions(); // Fetch updated questions after removing choice
         } catch (error) {
             console.error('Error removing choice:', error);
@@ -51,7 +51,7 @@ const QuestionList = ({ filteredQuestions, fetchQuestions }) => {
 
     const handleUpdateQuestion = async (question) => {
         try {
-            await axios.put(`http://localhost:5000/questions/${question.id}`, question);
+            await axios.put(`https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions/${question.id}`, question);
             fetchQuestions(); // Fetch updated questions after updating
             setEditModeQuestions((prevEditModeQuestions) => {
                 const updatedEditModeQuestions = new Set(prevEditModeQuestions);

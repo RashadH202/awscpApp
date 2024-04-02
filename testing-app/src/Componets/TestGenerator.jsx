@@ -18,12 +18,12 @@ const TestGenerator = () => {
     // Fetch questions from the backend
     const fetchQuestions = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/questions');
-            setQuestions(response.data.questions);
+          const response = await axios.get('https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions');
+          setQuestions(response.data);
         } catch (error) {
-            console.error('Error fetching questions:', error);
+          console.error('Error fetching questions:', error);
         }
-    };
+      };
 
     // Generate test with random questions
     const generateTest = () => {

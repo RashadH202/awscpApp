@@ -28,8 +28,8 @@ const RealTestGenerator = () => {
 
     const fetchQuestions = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/questions');
-            setQuestions(response.data.questions);
+            const response = await axios.get('https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions');
+            setQuestions(response.data);
         } catch (error) {
             console.error('Error fetching questions:', error);
         }
@@ -68,15 +68,25 @@ const RealTestGenerator = () => {
         const correctAnswers = selectedQuestions.filter(question => userAnswers[question.id] === question.correct_answer);
         const accuracyPercentage = (correctAnswers.length / totalQuestions) * 100;
         setScore(accuracyPercentage);
-
-        // Send test results to the server
+    
         try {
-            await axios.post('http://localhost:5000/highscores', {
+            // Fetch the highest ID currently present in the database
+            const response = await axios.get('https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/highscores');
+            const highScores = response.data;
+            const highestId = highScores.reduce((maxId, score) => Math.max(maxId, parseInt(score.id)), 0);
+    
+            // Increment the highest ID by 1 to generate a new ID for the new entry
+            const newId = highestId + 1;
+    
+            // Send test results to the server with the new ID
+            await axios.post('https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/highscores', {
+                id: newId.toString(),
                 score: accuracyPercentage,
                 timeFinished: new Date().toLocaleString(),
                 numberOfQuestions: totalQuestions
             });
         } catch (error) {
+            console.log()
             console.error('Error sending test results:', error);
         }
     };
