@@ -9,12 +9,17 @@ import QuestionCount from './QuestionCount'; // Import the QuestionCount compone
 const NavBar = ({ fetchQuestions, handleSearchInputChange, searchQuery, questionCount }) => {
     return (
         <Navbar bg="dark" variant="dark">
+            {/* Brand name */}
             <Navbar.Brand href="#home">AWSCP Practice Test</Navbar.Brand>
+            {/* Left-aligned items */}
             <Nav className="mr-auto">
+                {/* AddQuestionModal component */}
                 <AddQuestionModal fetchQuestions={fetchQuestions} />
             </Nav>
+            {/* Right-aligned items */}
             <Nav >
                 <Form inline="true">
+                    {/* SearchQuestions component */}
                     <SearchQuestions
                         handleSearchInputChange={handleSearchInputChange}
                         searchQuery={searchQuery}
@@ -23,16 +28,19 @@ const NavBar = ({ fetchQuestions, handleSearchInputChange, searchQuery, question
             </Nav>
             <Nav >
                 <Form inline="true">
+                    {/* TestGenerator component */}
                     <TestGenerator />
                 </Form>
             </Nav>
             <Nav >
                 <Form inline="true">
+                    {/* RealTestGenerator component */}
                     <RealTestGenerator />
                 </Form>
             </Nav>
             <Nav >
-                <QuestionCount count={questionCount} /> {/* Integrate the QuestionCount component */}
+                {/* QuestionCount component */}
+                <QuestionCount count={questionCount} />
             </Nav>
         </Navbar>
     );

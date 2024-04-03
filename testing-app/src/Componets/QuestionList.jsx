@@ -3,8 +3,10 @@ import axios from 'axios';
 import { Form, Button, ListGroup } from 'react-bootstrap';
 
 const QuestionList = ({ filteredQuestions, fetchQuestions }) => {
-    const [editModeQuestions, setEditModeQuestions] = useState(new Set()); // State variable for questions in edit mode
+    // State variable for questions in edit mode
+    const [editModeQuestions, setEditModeQuestions] = useState(new Set());
 
+    // Function to delete a question
     const deleteQuestion = async (questionId) => {
         try {
             await axios.delete(`https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions/${questionId}`);
@@ -14,6 +16,7 @@ const QuestionList = ({ filteredQuestions, fetchQuestions }) => {
         }
     };
 
+    // Function to update a question
     const updateQuestion = async (updatedQuestion) => {
         try {
             await axios.patch(`https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions/${updatedQuestion.id}`, updatedQuestion);
@@ -23,12 +26,14 @@ const QuestionList = ({ filteredQuestions, fetchQuestions }) => {
         }
     };
 
+    // Function to handle choice change
     const handleChoiceChange = (e, index, question) => {
         const choices = [...question.choices];
         choices[index] = e.target.value;
         updateQuestion({ ...question, choices });
     };
 
+    // Function to add a choice input
     const addChoiceInput = async (question) => {
         const choices = [...question.choices, '']; // Add an empty choice
         try {
@@ -39,6 +44,7 @@ const QuestionList = ({ filteredQuestions, fetchQuestions }) => {
         }
     };
 
+    // Function to remove a choice input
     const removeChoiceInput = async (index, question) => {
         const choices = [...question.choices.slice(0, index), ...question.choices.slice(index + 1)];
         try {
@@ -49,9 +55,10 @@ const QuestionList = ({ filteredQuestions, fetchQuestions }) => {
         }
     };
 
+    // Function to handle updating a question
     const handleUpdateQuestion = async (question) => {
         try {
-            await axios.Patch(`https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions/${question.id}`, question);
+            await axios.patch(`https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions/${question.id}`, question);
             fetchQuestions(); // Fetch updated questions after updating
             setEditModeQuestions((prevEditModeQuestions) => {
                 const updatedEditModeQuestions = new Set(prevEditModeQuestions);
@@ -63,6 +70,7 @@ const QuestionList = ({ filteredQuestions, fetchQuestions }) => {
         }
     };
 
+    // Function to toggle edit mode for a question
     const toggleEditMode = (questionId) => {
         setEditModeQuestions((prevEditModeQuestions) => {
             const updatedEditModeQuestions = new Set(prevEditModeQuestions);

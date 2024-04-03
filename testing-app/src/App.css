@@ -1,3 +1,4 @@
+```css
 /* App container */
 .App {
   padding: 1.4vw;
@@ -49,11 +50,13 @@ h1 {
   max-height: 56vh;
   overflow-y: auto;
 }
-.question-list.list-group{
+
+.question-list.list-group {
   overflow-y: scroll;
   scroll-behavior: auto;
-  max-height:85vh;
+  max-height: 85vh;
 }
+
 .question-item {
   border: 0.07vw solid #ccc;
   border-radius: 0.35vw;
@@ -100,16 +103,18 @@ h1 {
 }
 
 /* Button styles */
-.btn{
-  width:8vw;
-  height:5vh;
-  font-size:1rem;
+.btn {
+  width: 8vw;
+  height: 5vh;
+  font-size: 1rem;
 }
+
 .btn.btn-primary {
-  font-size:.5rem;
+  font-size: 0.5rem;
 }
+
 button {
-  padding: 0.20vw .5vw;
+  padding: 0.20vw 0.5vw;
   background-color: #2cff10;
   color: #fff;
   border: none;
@@ -121,14 +126,16 @@ button:hover {
   background-color: #0056b3;
 }
 
+/* Navbar styles */
 .navbar {
   display: flex;
   flex-direction: row;
-  padding: .5vw;
+  padding: 0.5vw;
   max-height: 10vh;
-  font-size: .7rem;
+  font-size: 0.7rem;
 }
 
+/* Search container styles */
 .search-container {
   display: flex;
   justify-content: space-between;
@@ -142,12 +149,14 @@ button:hover {
 }
 
 .search.form-control {
- height: 50vh;
+  height: 50vh;
   margin-left: 0.35vw;
 }
+
 input#search.form-control {
   height: 4vh;
 }
+
 .search-container-comp {
   height: 8vh;
   margin-left: 1.5vw;
@@ -159,50 +168,16 @@ input#search.form-control {
 }
 
 .navbar-nav {
-  color:#fff;
+  color: #fff;
 }
 
 .navbar-brand {
-  font-size: .5vh;
-}
-/* 
-testing modal css */
-
-
-
-/* Styling for the radio buttons */
-input[type="radio"] {
-  margin-right: 0.5rem;
+  font-size: 0.5vh;
 }
 
-.question-container {
-  margin-bottom: 20px; /* Add some space between questions */
-  border-bottom: 1px solid #ccc; /* Add border to separate questions */
-  padding-bottom: 20px; /* Add some padding below each question */
-}
-
-.choice-label {
-  margin-right: 10px; /* Add some space between the choice label and the radio button */
-  font-weight: bold; /* Make the choice label bold */
-}
-
-.question-prompt {
-  margin-bottom: 10px; /* Add some space below the question */
-  font-weight: bold; /* Make the question bold */
-}
-
-.answer-choice {
-  margin-bottom: 5px; /* Add some space between choices */
-}
-
-.answer-feedback {
-  margin-top: 5px; /* Add some space above the answer feedback */
-  color: #ff0000; /* Set color to red for wrong answers */
-  font-style: italic; /* Make the feedback italic */
-}
-
+/* Modal styles */
 .modal-content {
-  padding: 20px; /* Add padding to the modal content */
+  padding: 20px;
 }
 
 /* Styling for the radio buttons */
@@ -214,8 +189,8 @@ input[type="radio"] {
 .submit-button {
   margin-top: 1rem;
 }
-/* 
-real test generator */
+
+/* Test generator container styles */
 .test-generator-container {
   font-family: Arial, sans-serif;
   padding: 20px;
@@ -282,13 +257,11 @@ real test generator */
 }
 
 .answer-feedback {
-  margin-top: 5px;
+  margin-top: 5
+
+px;
   color: #ff0000;
   font-style: italic;
-}
-
-.modal-content {
-  padding: 20px;
 }
 
 /* Styling for the radio buttons */

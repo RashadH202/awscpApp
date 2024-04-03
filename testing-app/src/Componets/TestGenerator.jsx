@@ -71,9 +71,11 @@ const TestGenerator = () => {
             </div>
             {/* Modal component */}
             <Modal show={showModal} onHide={handleCloseModal}>
+                {/* Modal Header */}
                 <Modal.Header closeButton>
                     <Modal.Title>Practice Test</Modal.Title>
                 </Modal.Header>
+                {/* Modal Body */}
                 <Modal.Body>
                     {selectedQuestions.map(question => (
                         <div key={question.id} className="question-container">
@@ -108,8 +110,9 @@ const TestGenerator = () => {
                         </div>
                     ))}
                 </Modal.Body>
-                {/* Modal footer with close button */}
+                {/* Modal Footer */}
                 <Modal.Footer>
+                    {/* Close button */}
                     <Button variant="secondary" onClick={handleCloseModal}>
                         Close
                     </Button>

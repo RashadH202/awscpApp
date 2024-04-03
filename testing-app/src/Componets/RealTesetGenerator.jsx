@@ -102,9 +102,11 @@ const RealTestGenerator = () => {
                 <Button onClick={generateTest}>Timed Practice Test</Button>
             </div>
             <Modal show={showModal} onHide={handleCloseModal}>
+                {/* Modal Header */}
                 <Modal.Header closeButton>
                     <Modal.Title>Timed Practice Test</Modal.Title>
                 </Modal.Header>
+                {/* Modal Body */}
                 <Modal.Body>
                     <p>Time Left: {formatTime(timeLeft)}</p>
                     <input
@@ -116,14 +118,18 @@ const RealTestGenerator = () => {
                         disabled={isTestSubmitted}
                     />
                     <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
+                        {/* Map through selected questions and render them */}
                         {selectedQuestions.map(question => (
                             <li key={question.id} className="question-container">
                                 <p className="question">{question.question}</p>
                                 <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
+                                    {/* Map through choices of each question and render them */}
                                     {question.choices.map((choice, index) => (
                                         <li key={choice} className="choice">
                                             <label style={{ display: 'flex', alignItems: 'center' }}>
+                                                {/* Render choice label */}
                                                 <span className="choice-label">{String.fromCharCode(65 + index)}.</span>
+                                                {/* Radio button for choice */}
                                                 <input
                                                     type="radio"
                                                     name={`question_${question.id}`}
@@ -131,11 +137,13 @@ const RealTestGenerator = () => {
                                                     onChange={() => handleUserAnswer(question.id, choice)}
                                                     disabled={isTestSubmitted}
                                                 />
+                                                {/* Render choice */}
                                                 {choice}
                                             </label>
                                         </li>
                                     ))}
                                 </ul>
+                                {/* Render correct answer if test is submitted */}
                                 {isTestSubmitted && (
                                     <p className="answer-feedback">
                                         Correct Answer: {question.correct_answer}
@@ -144,16 +152,20 @@ const RealTestGenerator = () => {
                             </li>
                         ))}
                     </ul>
+                    {/* Render submit button if test is not submitted */}
                     {!isTestSubmitted && (
                         <Button variant="primary" onClick={handleSubmitTest} className="submit-button">Submit Test</Button>
                     )}
+                    {/* Render test result if test is submitted */}
                     {isTestSubmitted && (
                         <p className="answer-feedback">
                             {score >= 77 ? `Congratulations! You passed with a score of ${score}%` : `Sorry, you failed with a score of ${score}%`}
                         </p>
                     )}
                 </Modal.Body>
+                {/* Modal Footer */}
                 <Modal.Footer>
+                    {/* Close button */}
                     <Button variant="secondary" onClick={handleCloseModal}>
                         Close
                     </Button>
