@@ -27,10 +27,11 @@ const HighScore = () => {
                 {highScores.map((score, index) => (
                     <li key={index} className="high-score"> {/* Apply a class for each high score item */}
                         <p>
+                        <span className="name">{score.name}</span> -
                             <span className="score">{score.score}</span> - 
-                            <span className="time">{score.timetofinish}</span> - 
-                            <span className="number">{score.numberofquestions}</span>
-                            <span className="name">{score.name}</span>
+                            <span className="time">{score.numberOfQuestions}</span> - 
+                            <span className="number">{score.timeFinished}</span>
+                           
                         </p>
                     </li>
                 ))}

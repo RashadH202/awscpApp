@@ -5,12 +5,13 @@ import { Modal, Button } from 'react-bootstrap';
 const RealTestGenerator = () => {
     const [questions, setQuestions] = useState([]);
     const [selectedQuestions, setSelectedQuestions] = useState([]);
-    const [totalQuestions, setTotalQuestions] = useState(100); // Default total number of questions
+    const [totalQuestions, setTotalQuestions] = useState(100);
     const [showModal, setShowModal] = useState(false);
-    const [userAnswers, setUserAnswers] = useState({}); // Store user's answers
-    const [timeLeft, setTimeLeft] = useState(4200); // Default time: 70 minutes in seconds
+    const [userAnswers, setUserAnswers] = useState({});
+    const [timeLeft, setTimeLeft] = useState(4200);
     const [isTestSubmitted, setIsTestSubmitted] = useState(false);
     const [score, setScore] = useState(0);
+    const [username, setUsername] = useState('');
 
     useEffect(() => {
         fetchQuestions();
@@ -37,19 +38,15 @@ const RealTestGenerator = () => {
 
     const generateTest = () => {
         const selected = [];
-
-        // Select random questions to meet the total number specified by the user
         const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
         for (let i = 0; i < totalQuestions && i < shuffledQuestions.length; i++) {
             selected.push(shuffledQuestions[i]);
         }
-
         setSelectedQuestions(selected);
         setShowModal(true);
-        // Set timer to start automatically
-        setTimeLeft(4200); // 70 minutes in seconds
-        setIsTestSubmitted(false); // Reset test submission state
-        setUserAnswers({}); // Reset user's answers
+        setTimeLeft(4200);
+        setIsTestSubmitted(false);
+        setUserAnswers({});
     };
 
     const handleCloseModal = () => {
@@ -64,29 +61,29 @@ const RealTestGenerator = () => {
     };
 
     const handleSubmitTest = async () => {
+        if (!username.trim()) {
+            alert('Please enter your username.');
+            return;
+        }
+
         setIsTestSubmitted(true);
         const correctAnswers = selectedQuestions.filter(question => userAnswers[question.id] === question.correct_answer);
         const accuracyPercentage = (correctAnswers.length / totalQuestions) * 100;
         setScore(accuracyPercentage);
     
         try {
-            // Fetch the highest ID currently present in the database
             const response = await axios.get('https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/highscores');
             const highScores = response.data;
             const highestId = highScores.reduce((maxId, score) => Math.max(maxId, parseInt(score.id)), 0);
-    
-            // Increment the highest ID by 1 to generate a new ID for the new entry
             const newId = highestId + 1;
-    
-            // Send test results to the server with the new ID
             await axios.post('https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/highscores', {
                 id: newId.toString(),
                 score: accuracyPercentage,
                 timeFinished: new Date().toLocaleString(),
-                numberOfQuestions: totalQuestions
+                numberOfQuestions: totalQuestions,
+                name: username.trim() // Include the username in the submission
             });
         } catch (error) {
-            console.log()
             console.error('Error sending test results:', error);
         }
     };
@@ -104,13 +101,20 @@ const RealTestGenerator = () => {
                 <input type="number" value={totalQuestions} onChange={(e) => setTotalQuestions(e.target.value)} />
                 <Button onClick={generateTest}>Timed Practice Test</Button>
             </div>
-            {/* Modal component */}
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Timed Practice Test</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Time Left: {formatTime(timeLeft)}</p>
+                    <input
+                        type="text"
+                        placeholder="Enter your username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        style={{ marginBottom: '10px' }}
+                        disabled={isTestSubmitted}
+                    />
                     <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
                         {selectedQuestions.map(question => (
                             <li key={question.id} className="question-container">
@@ -125,7 +129,7 @@ const RealTestGenerator = () => {
                                                     name={`question_${question.id}`}
                                                     value={choice}
                                                     onChange={() => handleUserAnswer(question.id, choice)}
-                                                    disabled={isTestSubmitted} // Disable inputs after test is submitted
+                                                    disabled={isTestSubmitted}
                                                 />
                                                 {choice}
                                             </label>
