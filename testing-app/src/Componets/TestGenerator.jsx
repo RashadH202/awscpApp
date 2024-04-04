@@ -12,6 +12,7 @@ const TestGenerator = () => {
 
     // Fetch questions from the backend when the component mounts
     useEffect(() => {
+        console.log("Fetching questions...");
         fetchQuestions();
     }, []);
 
@@ -19,6 +20,7 @@ const TestGenerator = () => {
     const fetchQuestions = async () => {
         try {
           const response = await axios.get('https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions');
+          console.log("Questions fetched:", response.data);
           setQuestions(response.data);
         } catch (error) {
           console.error('Error fetching questions:', error);
@@ -37,12 +39,14 @@ const TestGenerator = () => {
 
         setSelectedQuestions(selected);
         setShowModal(true);
+        console.log("Test generated with questions:", selected);
     };
 
     // Close the modal and reset user's answers
     const handleCloseModal = () => {
         setShowModal(false);
         setUserAnswers({});
+        console.log("Modal closed.");
     };
 
     // Update user's answers when they select an option
@@ -51,16 +55,24 @@ const TestGenerator = () => {
             ...prevAnswers,
             [questionId]: selectedAnswer
         }));
+        console.log(`User answered question ${questionId}: ${selectedAnswer}`);
     };
 
     // Check if the user's answer is correct
     const isAnswerCorrect = (questionId, selectedAnswer) => {
         const question = selectedQuestions.find(q => q.id === questionId);
-        return question.correct_answer === selectedAnswer;
+        return question.correct_answer.includes(selectedAnswer);
     };
 
     // Render the choices as 'A', 'B', 'C', 'D'
     const choicesLabels = ['A', 'B', 'C', 'D'];
+
+    const handleSubmitTest = () => {
+        const correctAnswers = Object.keys(userAnswers).filter(questionId => isAnswerCorrect(questionId, userAnswers[questionId]));
+        const accuracyPercentage = (correctAnswers.length / totalQuestions) * 100;
+        console.log("Accuracy Percentage:", accuracyPercentage);
+        // You can proceed with submitting the test results here
+    };
 
     return (
         <div>
@@ -104,7 +116,7 @@ const TestGenerator = () => {
                                 <p className="answer-feedback">
                                     {isAnswerCorrect(question.id, userAnswers[question.id])
                                         ? 'Your answer is correct!'
-                                        : `Your answer is wrong. The correct answer is: ${question.correct_answer}`}
+                                        : `Your answer is wrong. The correct answer is: ${question.correct_answer.join(', ')}`}
                                 </p>
                             )}
                         </div>
@@ -115,6 +127,10 @@ const TestGenerator = () => {
                     {/* Close button */}
                     <Button variant="secondary" onClick={handleCloseModal}>
                         Close
+                    </Button>
+                    {/* Submit button */}
+                    <Button variant="primary" onClick={handleSubmitTest}>
+                        Submit Test
                     </Button>
                 </Modal.Footer>
             </Modal>
