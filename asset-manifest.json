@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/awscpApp/testing-app/static/css/main.38eb93b9.css",
-    "main.js": "/awscpApp/testing-app/static/js/main.86ee19fa.js",
-    "index.html": "/awscpApp/testing-app/index.html",
-    "main.38eb93b9.css.map": "/awscpApp/testing-app/static/css/main.38eb93b9.css.map",
-    "main.86ee19fa.js.map": "/awscpApp/testing-app/static/js/main.86ee19fa.js.map"
+    "main.css": "/awscpApp/static/css/main.38eb93b9.css",
+    "main.js": "/awscpApp/static/js/main.86ee19fa.js",
+    "index.html": "/awscpApp/index.html",
+    "main.38eb93b9.css.map": "/awscpApp/static/css/main.38eb93b9.css.map",
+    "main.86ee19fa.js.map": "/awscpApp/static/js/main.86ee19fa.js.map"
   },
   "entrypoints": [
     "static/css/main.38eb93b9.css",
