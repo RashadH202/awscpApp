@@ -13,7 +13,7 @@ The AWSCP High Score App is a serverless web application built on AWS Lambda, AP
 
 ## Technologies Used
 - **AWS Lambda**: Serverless compute service used to execute application logic
-- **Amazon API Gateway**: Fully managed service to create, deploy, and manage APIs
+- **Amazon API Gateway**: Fully managed service to create, deploy, and manage APIsgit
 - **Amazon DynamoDB**: Fully managed NoSQL database service used to store questions and high scores
 - **Flask**: Micro web framework for building web applications in Python
 - **React**: JavaScript library for building user interfaces
@@ -25,7 +25,7 @@ The AWSCP High Score App is a serverless web application built on AWS Lambda, AP
 - **Python**: Programming language used for Flask backend
 
 ## Setup
-1. Clone the repository: `git clone <repository-url>`
+1. Clone the repository: `git clone https://github.com/RashadH202/awscpApp`
 2. Navigate to the `backend` directory and follow the setup instructions in the backend README
 3. Navigate to the `frontend` directory
 4. Install dependencies: `npm install`
