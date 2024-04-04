@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/awscpApp/static/css/main.38eb93b9.css",
-    "main.js": "/awscpApp/static/js/main.86ee19fa.js",
+    "main.js": "/awscpApp/static/js/main.76064f86.js",
     "index.html": "/awscpApp/index.html",
     "main.38eb93b9.css.map": "/awscpApp/static/css/main.38eb93b9.css.map",
-    "main.86ee19fa.js.map": "/awscpApp/static/js/main.86ee19fa.js.map"
+    "main.76064f86.js.map": "/awscpApp/static/js/main.76064f86.js.map"
   },
   "entrypoints": [
     "static/css/main.38eb93b9.css",
-    "static/js/main.86ee19fa.js"
+    "static/js/main.76064f86.js"
   ]
 }
