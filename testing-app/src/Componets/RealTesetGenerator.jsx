@@ -14,7 +14,6 @@ const RealTestGenerator = () => {
     const [username, setUsername] = useState('');
 
     useEffect(() => {
-        console.log("Fetching questions...");
         fetchQuestions();
     }, []);
 
@@ -23,18 +22,14 @@ const RealTestGenerator = () => {
             const timer = setTimeout(() => {
                 setTimeLeft(prevTime => prevTime - 1);
             }, 1000);
-            console.log("Timer started.");
-            return () => {
-                clearTimeout(timer);
-                console.log("Timer cleared.");
-            };
+
+            return () => clearTimeout(timer);
         }
     }, [showModal, timeLeft]);
 
     const fetchQuestions = async () => {
         try {
             const response = await axios.get('https://52ngda61vl.execute-api.us-east-1.amazonaws.com/default/questions');
-            console.log("Questions fetched:", response.data);
             setQuestions(response.data);
         } catch (error) {
             console.error('Error fetching questions:', error);
@@ -52,12 +47,10 @@ const RealTestGenerator = () => {
         setTimeLeft(4200);
         setIsTestSubmitted(false);
         setUserAnswers({});
-        console.log("Test generated.");
     };
 
     const handleCloseModal = () => {
         setShowModal(false);
-        console.log("Modal closed.");
     };
 
     const handleUserAnswer = (questionId, selectedAnswer) => {
@@ -65,7 +58,6 @@ const RealTestGenerator = () => {
             ...prevAnswers,
             [questionId]: selectedAnswer
         }));
-        console.log(`User answered question ${questionId}: ${selectedAnswer}`);
     };
 
     const handleSubmitTest = async () => {
@@ -158,7 +150,7 @@ const RealTestGenerator = () => {
                                 {/* Render correct answer if test is submitted */}
                                 {isTestSubmitted && (
                                     <p className="answer-feedback">
-                                        Correct Answer: {question.correct_answer.join(', ')}
+                                        Correct Answer: {question.correct_answer}
                                     </p>
                                 )}
                             </li>
