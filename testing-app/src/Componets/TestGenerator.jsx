@@ -6,7 +6,6 @@ const TestGenerator = () => {
     // State variables
     const [questions, setQuestions] = useState([]);
     const [selectedQuestions, setSelectedQuestions] = useState([]);
-    const [totalQuestions, setTotalQuestions] = useState(100); // Default total number of questions
     const [showModal, setShowModal] = useState(false);
     const [userAnswers, setUserAnswers] = useState({}); // Store user's answers
 
@@ -23,15 +22,15 @@ const TestGenerator = () => {
         } catch (error) {
           console.error('Error fetching questions:', error);
         }
-      };
+    };
 
-    // Generate test with random questions
+    // Generate test with a fixed number of questions (65)
     const generateTest = () => {
         const selected = [];
 
-        // Select random questions to meet the total number specified by the user
+        // Select random questions to meet the fixed number (65)
         const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
-        for (let i = 0; i < totalQuestions && i < shuffledQuestions.length; i++) {
+        for (let i = 0; i < 40 && i < shuffledQuestions.length; i++) {
             selected.push(shuffledQuestions[i]);
         }
 
@@ -45,31 +44,27 @@ const TestGenerator = () => {
         setUserAnswers({});
     };
 
- // Update user's answers when they select an option
- const handleUserAnswer = (questionId, selectedAnswer) => {
-    setUserAnswers(prevAnswers => ({
-        ...prevAnswers,
-        [questionId]: selectedAnswer
-    }));
-    console.log(`User answered question ${questionId}: ${selectedAnswer}`);
-};
+    // Update user's answers when they select an option
+    const handleUserAnswer = (questionId, selectedAnswer) => {
+        setUserAnswers(prevAnswers => ({
+            ...prevAnswers,
+            [questionId]: selectedAnswer
+        }));
+        console.log(`User answered question ${questionId}: ${selectedAnswer}`);
+    };
 
-// Check if the user's answer is correct
-const isAnswerCorrect = (questionId, selectedAnswer) => {
-    const question = selectedQuestions.find(q => q.id === questionId);
-    return question.correct_answer.includes(selectedAnswer);
-};
+    // Check if the user's answer is correct
+    const isAnswerCorrect = (questionId, selectedAnswer) => {
+        const question = selectedQuestions.find(q => q.id === questionId);
+        return question.correct_answer.includes(selectedAnswer);
+    };
 
     // Render the choices as 'A', 'B', 'C', 'D'
     const choicesLabels = ['A', 'B', 'C', 'D'];
 
     return (
         <div>
-            <div>
-                <span className='numberofquestions_nav'>Number of Questions:</span>
-                <input type="number" value={totalQuestions} onChange={(e) => setTotalQuestions(e.target.value)} />
-                <Button onClick={generateTest}>Practice Test</Button>
-            </div>
+            40 Queestions: <Button onClick={generateTest}>Practice Test</Button>
             {/* Modal component */}
             <Modal show={showModal} onHide={handleCloseModal}>
                 {/* Modal Header */}

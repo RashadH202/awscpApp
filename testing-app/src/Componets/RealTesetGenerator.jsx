@@ -5,7 +5,6 @@ import { Modal, Button } from 'react-bootstrap';
 const RealTestGenerator = () => {
     const [questions, setQuestions] = useState([]);
     const [selectedQuestions, setSelectedQuestions] = useState([]);
-    const [totalQuestions, setTotalQuestions] = useState(100);
     const [showModal, setShowModal] = useState(false);
     const [userAnswers, setUserAnswers] = useState({});
     const [timeLeft, setTimeLeft] = useState(4200);
@@ -39,7 +38,7 @@ const RealTestGenerator = () => {
     const generateTest = () => {
         const selected = [];
         const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
-        for (let i = 0; i < totalQuestions && i < shuffledQuestions.length; i++) {
+        for (let i = 0; i < 65 && i < shuffledQuestions.length; i++) {
             selected.push(shuffledQuestions[i]);
         }
         setSelectedQuestions(selected);
@@ -71,7 +70,7 @@ const RealTestGenerator = () => {
             // Check if user's answer is part of the correct answer
             return question.correct_answer.includes(userAnswers[question.id]);
         });
-        const accuracyPercentage = (correctAnswers.length / totalQuestions) * 100;
+        const accuracyPercentage = (correctAnswers.length / 100) * 100;
         setScore(accuracyPercentage);
 
         try {
@@ -83,7 +82,7 @@ const RealTestGenerator = () => {
                 id: newId.toString(),
                 score: accuracyPercentage,
                 timeFinished: new Date().toLocaleString(),
-                numberOfQuestions: totalQuestions,
+                numberOfQuestions: 100,
                 name: username.trim() // Include the username in the submission
             });
             console.log("Test results submitted.");
@@ -100,15 +99,11 @@ const RealTestGenerator = () => {
 
     return (
         <div>
-            <div>
-                <span className='numberofquestions_nav'>Number of Questions:</span>
-                <input type="number" value={totalQuestions} onChange={(e) => setTotalQuestions(e.target.value)} />
-                <Button onClick={generateTest}>Timed Practice Test</Button>
-            </div>
+             65 Questions: <Button onClick={generateTest}>Timed Practice Test</Button>
             <Modal show={showModal} onHide={handleCloseModal}>
                 {/* Modal Header */}
                 <Modal.Header closeButton>
-                    <Modal.Title>Timed Practice Test</Modal.Title>
+                    <Modal.Title>Timed Test</Modal.Title>
                 </Modal.Header>
                 {/* Modal Body */}
                 <Modal.Body>

@@ -402,11 +402,11 @@ input[type="radio"] {
     padding: 0.5rem 5rem; /* Adjust padding for dropdown toggle */
     margin-left: 5vw;
     font-size: 0.8rem; /* Decrease font size for dropdown toggle */
-    width: 50px;
+    width: 10%;
   }
 
   .dropdown-menu {
-    min-width: 20rem; /* Adjust min-width for dropdown menu */
+    min-width: 15rem; /* Adjust min-width for dropdown menu */
     font-size: 0.8rem; /* Decrease font size for dropdown menu */
   }
 
@@ -456,6 +456,11 @@ input[type="radio"] {
     padding: 0.5rem; /* Decrease padding for form controls */
     font-size: 0.8rem; /* Decrease font size for form controls */
   }
+  
+  .dropdown-menu {
+    width: 19rem;
+    font-size: .8rem;
 
+  }
 }
 
